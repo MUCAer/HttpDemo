@@ -1,0 +1,11 @@
+module inf {
+
+struct TraceBlock {
+    0 require long          logid;      
+    1 require string        upstream_ip;
+    2 require long          time_stamp;
+    3 require string        service_name;
+    4 require string        status; // caller: 0
+};
+
+};
