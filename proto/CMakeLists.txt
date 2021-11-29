@@ -1,0 +1,7 @@
+IF (APPLE)
+  SET(PROTOBUF_PROTOC_EXECUTABLE ./../thirdlib/mac-protoc)
+ELSEIF (UNIX)
+  # SET(PROTOBUF_PROTOC_EXECUTABLE   ./../thirdlib/protoc-3.13.0.0)
+  SET(TARS2CPP_EXECUTABLE   /usr/local/tars/cpp/tools/tars2cpp)
+  EXEC_PROGRAM(${TARS2CPP_EXECUTABLE} ARGS  *.tars --dir=./) 
+ENDIF ()

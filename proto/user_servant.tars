@@ -1,0 +1,86 @@
+#include "utils.tars"
+
+module mus
+{
+
+    //base user info
+    struct UserInfo {
+        0 require long              uid;            //user id
+        1 require string            imei;           //device info
+        2 require string            user_name;      // username
+        3 require long              type;           // user type
+        4 require long              status;         // user status
+        5 require string            passwd;         // passwd
+        6 optional string           phone;          // phone number
+        7 optional string           email;          // email
+        8 optional map<string, string>  ext_info;   // extra info
+    };
+
+
+    //user query request struct
+    struct RetrieveUserListRequest {
+        0       require   inf::TraceBlock           trace_payload;      //trace block
+        1       require   vector<long>              uids;               //uids
+        2       optional  map<string, string>       ext_info;           //extra info
+    };
+
+    //user register request struct
+    struct RegisterUserListRequest {
+        0       require   inf::TraceBlock           trace_payload;      //trace block
+        1       require   string                    user_name;          //
+        2       optional  string                    phone;
+        3       optional  string                    email;
+        4       optional  map<string, string>       ext_info;
+    };
+
+
+interface UserServant {
+        
+        /**
+          * query username
+          * 查询用户名是否可用
+          * @param request :  user_name
+          * @return  0  : OK
+          *         -1  : Failed
+         */
+        int check_username(string user_name);
+    
+        /**
+          * retrive user list
+          * 获取用户详细信息接口
+          * @param request :  RetrieveUserListRequest
+          * @param response : map<long, UserInfo>
+          * @return  0  : OK
+          *         -1  : Failed
+         */
+        int retrieve_user_list(
+                 RetrieveUserListRequest request,
+                 out map<long, UserInfo> response);
+
+        /**
+          * register user list
+          * 注册用户
+          * @param request :  RegisterUserListRequest
+          * @param response : map<long, UserInfo>
+          * @return  0  : OK
+          *         -1  : Failed
+         */
+        int register_user_list(
+                 RegisterUserListRequest request,
+                 out map<long, UserInfo> response);
+
+
+        
+
+        /**
+          * test interface,
+          * 测试用接口
+          * @param request :  input_info
+          * @param response : input_param
+          * @return  0  : OK
+          *         -1  : Failed
+         */
+        int test(string input_info,string input_param,out map<string,string> out_ext_param);
+};
+
+};
