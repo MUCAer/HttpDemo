@@ -1,6 +1,5 @@
-# UserServer
-=========
-[![UnitTest](https://github.com/MachinePlay/DemoServer/actions/workflows/docker-image.yml/badge.svg)](https://github.com/MachinePlay/DemoServer/actions/workflows/docker-image.yml)
+# HttpServer
+[![UnitTest](https://github.com/MachinePlay/HttpDemo/actions/workflows/docker-image.yml/badge.svg)](https://github.com/MachinePlay/HttpDemo/actions/workflows/docker-image.yml)
 
 项目遵循 谷歌的[`Live at Head`](https://abseil.io/about/philosophy)思想，尽可能地去尝试使用最新版本的依赖和功能，推荐使用最新master主干提交版本。  
 Project now follows the Abseil Live at Head philosophy. We recommend using the latest commit in the master branch in your projects.
@@ -17,11 +16,15 @@ mus, 即mad user service, 是基础的用户中心服务代码, 承载最基础�
 
 # 快速开始
 - 服务编译
+写好代码
 ```
-cmake .. 
-make -j8
-make mus-tar
-make mus-upload
+docker compose up -d //会直接启动docker 环境，可以在容器外开发，进入docker内编译
+//开发完成
+cd build
+cmake .. // 指定环境 —DTARS_WEB=xxx —DTARS_TOKEN=xxxx，才可以直接上传
+make -j8 //编译
+make HttpServer-tar //打包
+make HttpServer-upload。//上传，注意，上传功能需要在cmake生成阶段指定环境和token
 ```
 - 服务发布
 
